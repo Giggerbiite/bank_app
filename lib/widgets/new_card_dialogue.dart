@@ -17,7 +17,7 @@ class _NewCardDialogueState extends State<NewCardDialogue> {
   var _cardType = '';
   final List<NewCard> addTx = [];
   var currentSelectedValue;
-  final deviceTypes = [
+  final cardTypes = [
     'Visa',
     'American Express',
     'Master',
@@ -33,12 +33,12 @@ class _NewCardDialogueState extends State<NewCardDialogue> {
       return;
     }
     final newTx = NewCard(
-      id: 3,//_cardList.newCard.length + 1,
+      id: _cardList.newCard.length,
       cardNo: enteredCardNumber,
       amount: enteredAmount,
       cardType: _cardType,
     );
-    print(newTx.id);
+    //print(newTx.id);
     Provider.of<NewCards>(context, listen: false).addNewCard(newTx);
     Navigator.of(context).pop();
   }
@@ -66,9 +66,9 @@ class _NewCardDialogueState extends State<NewCardDialogue> {
                     currentSelectedValue = newValue;
                     _cardType = newValue;
                   });
-                  print(currentSelectedValue);
+                  //print(currentSelectedValue);
                 },
-                items: deviceTypes.map((String value) {
+                items: cardTypes.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),

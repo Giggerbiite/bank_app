@@ -3,9 +3,14 @@ import '../widgets/scroll_card.dart';
 import '../widgets/add_scroll_card .dart';
 import '../widgets/scroll_history.dart';
 
-class UserScreenBody extends StatelessWidget {
+class UserScreenBody extends StatefulWidget {
   
 
+  @override
+  _UserScreenBodyState createState() => _UserScreenBodyState();
+}
+
+class _UserScreenBodyState extends State<UserScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Container(

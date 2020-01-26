@@ -3,10 +3,43 @@ import 'package:provider/provider.dart';
 import '../screens/card_detail_screen.dart';
 import '../providers/user_newcard.dart';
 
-class ScrollCard extends StatelessWidget {
+class ScrollCard extends StatefulWidget {
+  @override
+  _ScrollCardState createState() => _ScrollCardState();
+}
+
+class _ScrollCardState extends State<ScrollCard> {
+  var _showOnlyFavorites = false;
+  var _isInit = true;
+  var _isLoading = false;
+  int c = 0;
+
+
+  @override
+  void initState() {
+    // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
+    // Future.delayed(Duration.zero).then((_) {
+    //   Provider.of<Products>(context).fetchAndSetProducts();
+    // });
+    super.initState();
+  }
+  
+  @override
+  void didChangeDependencies() {
+    if (_isInit==true) {
+      Provider.of<NewCards>(context).fetchAndSetCards();
+    }
+
+    _isInit = false;
+
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final cardList = Provider.of<NewCards>(context, listen: true);
+    //print("/////////////////////////");
+    //print(cardList.newCard[1].cardType);
     String imageString(String cardType) {
       if (cardType == 'Visa') {
         return 'assets/banks/visa.jpeg';
@@ -22,6 +55,10 @@ class ScrollCard extends StatelessWidget {
       return 'You have selected an invalid card';
     }
 
+    c += 1;
+    print('value of C is');
+    print(c);
+
     return Container(
       color: Theme.of(context).primaryColor,
       height: 150.0,
@@ -31,6 +68,7 @@ class ScrollCard extends StatelessWidget {
         physics: PageScrollPhysics(),
         itemCount: cardList.newCard.length,
         itemBuilder: (context, int index) {
+          //print(cardList.newCard[index].cardType.toString());
           return ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
@@ -55,7 +93,8 @@ class ScrollCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Image.asset(
-                                imageString(cardList.newCard[index].cardType),
+                                imageString(cardList.newCard[index].cardType
+                                    .toString()),
                                 width: 50.0,
                                 height: 50.0,
                               ),
@@ -63,7 +102,7 @@ class ScrollCard extends StatelessWidget {
                                 height: 8,
                               ),
                               Text(
-                                cardList.newCard[index].cardNo,
+                                cardList.newCard[index].cardNo.toString(),
                                 textScaleFactor: 1.2,
                                 style: TextStyle(letterSpacing: 2.5),
                               ),
@@ -79,8 +118,10 @@ class ScrollCard extends StatelessWidget {
                                   children: <Widget>[
                                     Column(
                                       children: <Widget>[
-                                        Text(cardList.newCard[index].cardType),
+                                        Text(cardList.newCard[index].cardType
+                                            .toString()),
                                         Text(cardList.newCard[index].amount
+                                            .toString()
                                             .toString()),
                                       ],
                                     ),
