@@ -14,7 +14,6 @@ class _ScrollCardState extends State<ScrollCard> {
   var _isLoading = false;
   int c = 0;
 
-
   @override
   void initState() {
     // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
@@ -23,13 +22,14 @@ class _ScrollCardState extends State<ScrollCard> {
     // });
     super.initState();
   }
-  
+
   @override
   void didChangeDependencies() {
-    if (_isInit==true) {
+    if (_isInit == true) {
+      
       Provider.of<NewCards>(context).fetchAndSetCards();
     }
-
+    print('init set to true');
     _isInit = false;
 
     super.didChangeDependencies();
@@ -37,9 +37,9 @@ class _ScrollCardState extends State<ScrollCard> {
 
   @override
   Widget build(BuildContext context) {
-    final cardList = Provider.of<NewCards>(context, listen: true);
-    //print("/////////////////////////");
-    //print(cardList.newCard[1].cardType);
+    final cardList = Provider.of<NewCards>(context, listen: false);
+    print("build happned");
+    //print(cardList.newCard);
     String imageString(String cardType) {
       if (cardType == 'Visa') {
         return 'assets/banks/visa.jpeg';
@@ -55,9 +55,9 @@ class _ScrollCardState extends State<ScrollCard> {
       return 'You have selected an invalid card';
     }
 
-    c += 1;
-    print('value of C is');
-    print(c);
+    // c += 1;
+    // print('value of C is');
+    // print(c);
 
     return Container(
       color: Theme.of(context).primaryColor,
@@ -72,8 +72,8 @@ class _ScrollCardState extends State<ScrollCard> {
           return ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
-              height: 150.0,
-              width: 250.0,
+              height: (MediaQuery.of(context).size.height)*0.20,
+              width:  MediaQuery.of(context).size.width * 0.65,
               child: Card(
                 color: Theme.of(context).primaryColor,
                 elevation: 6,
