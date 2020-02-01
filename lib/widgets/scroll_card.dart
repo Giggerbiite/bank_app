@@ -26,10 +26,10 @@ class _ScrollCardState extends State<ScrollCard> {
   @override
   void didChangeDependencies() {
     if (_isInit == true) {
-      
+      print('Check init');
       Provider.of<NewCards>(context).fetchAndSetCards();
     }
-    print('init set to true');
+    print('init set to false');
     _isInit = false;
 
     super.didChangeDependencies();
@@ -37,7 +37,9 @@ class _ScrollCardState extends State<ScrollCard> {
 
   @override
   Widget build(BuildContext context) {
-    final cardList = Provider.of<NewCards>(context, listen: false);
+    print("build started");
+    final cardList = Provider.of<NewCards>(context, listen: true);
+    print(cardList.newCard);
     print("build happned");
     //print(cardList.newCard);
     String imageString(String cardType) {
@@ -55,9 +57,10 @@ class _ScrollCardState extends State<ScrollCard> {
       return 'You have selected an invalid card';
     }
 
-    // c += 1;
-    // print('value of C is');
-    // print(c);
+    c += 1;
+    print('value of C is');
+    print(c);
+    
 
     return Container(
       color: Theme.of(context).primaryColor,

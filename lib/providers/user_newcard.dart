@@ -7,9 +7,10 @@ import 'dart:convert';
 class NewCards with ChangeNotifier {
   List<NewCard> _newCard = [];
   List<NewCard> get newCard {
+    print("get card list");
     return [..._newCard];
   }
-
+  
   NewCard findById(String id) {
     return newCard.firstWhere((prod) => prod.id == id);
   }
@@ -23,14 +24,14 @@ class NewCards with ChangeNotifier {
         print('/////////////data null>>>>>>>>>>>>>>>>>>>');
         return;
       }
-      // print(extractedData['cards'][0]['amount']);
+      // print(extractedData);
       // print('/////////////data null>>>>>>>>>>>>>>>>>>>');
       // print(extractedData['cards'][0]['amount']);
       final List<NewCard> loadedCards = [];
       //extractedData['cards'].forEach((cardData) {
       //print(cardData[2]);
       for (int i = 0; i < extractedData['cards'].length; i++) {
-        print("loop runs");
+        print(i);
         loadedCards.add(NewCard(
           id: extractedData['cards'][i]['id'],
           cardNo: extractedData['cards'][i]['cardNo'],
@@ -62,14 +63,15 @@ class NewCards with ChangeNotifier {
         }),
         headers: {"Content-Type": "application/json"},
       );
-      //print("///////////////////////////");
-      //print(json.decode(response.body));
+      print("///////////////////////////");
+      final res= json.decode(response.body);
+      print(res['cards']['amount']);
 
       final newProduct = NewCard(
-        id: json.decode(response.body)[1]['id'],
-        cardNo: product.cardNo,
-        cardType: product.cardType,
-        amount: product.amount,
+        id: res['cards']['id'],
+        cardNo: res['cards']['cardNo'],
+        cardType: res['cards']['cardType'],
+        amount: res['cards']['amount'].toDouble(),
       );
       //print(newProduct);
       _newCard.add(newProduct);
