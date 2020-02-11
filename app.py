@@ -35,7 +35,7 @@ def create_card():
     cards=[]
     request_data = request.get_json()
     new_cards = NewCard(
-        # "id": request_data["id"],
+        # "id": request_data["id"],,,,
         cardNo=request_data["cardNo"],
         cardType=request_data["cardType"],
         amount=request_data["amount"],
