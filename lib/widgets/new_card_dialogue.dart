@@ -47,7 +47,7 @@ class _NewCardDialogueState extends State<NewCardDialogue> {
   Widget typeFieldWidget() {
     return Container(
       color: Theme.of(context).primaryColor,
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 0),
       child: FormField<String>(
         builder: (FormFieldState<String> state) {
           return InputDecorator(
@@ -96,18 +96,23 @@ class _NewCardDialogueState extends State<NewCardDialogue> {
               decoration: InputDecoration(
                   labelText: 'Card Number',
                   border: OutlineInputBorder(),
-                  
                   labelStyle: TextStyle(
                     color: Colors.black,
                   )),
               controller: cardNumberController,
+              keyboardType: TextInputType.number,
               //onSubmitted: (){} //=> submitData(),
               // onChanged: (val) {
               //   titleInput = val;
               // },
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
+              decoration: InputDecoration(
+                  labelText: 'Amount',
+                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                  )),
               controller: amountController,
               keyboardType: TextInputType.number,
 
@@ -115,27 +120,6 @@ class _NewCardDialogueState extends State<NewCardDialogue> {
               // onChanged: (val) => amountInput = val,
             ),
             typeFieldWidget(),
-
-            // Row(
-            //   children: <Widget>[
-            //     Text(' Select Card Type :'),
-            //     DropdownButton<String>(
-            //       items: <String>[
-            //         'Visa',
-            //         'American Express',
-            //         'Master',
-            //         'Discover',
-            //         'MissionLane'
-            //       ].map((String value) {
-            //         return new DropdownMenuItem<String>(
-            //           value: value,
-            //           child: new Text(value),
-            //         );
-            //       }).toList(),
-            //       onChanged: (value) => _cardType = value,
-            //     ),
-            //   ],
-            // ),
             FlatButton(
               child: Text('Add Card'),
               textColor: Colors.purple,

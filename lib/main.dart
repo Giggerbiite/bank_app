@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Bank App',
         theme: ThemeData(
-          brightness: Brightness.dark,
+          brightness: Brightness.light,
           primaryColor: Colors.cyan[200],
           accentColor: Colors.cyan[300],
           fontFamily: 'Georgia',
